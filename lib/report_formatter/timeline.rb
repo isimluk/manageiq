@@ -208,13 +208,13 @@ module ReportFormatter
       headers.delete(j)
       headers.push(j)
 
-      tl_message = TimelineMessage.new(mri)
+      flags = {:ems_cloud     => ems_cloud,
+               :ems_container => ems_container,
+               :time_zone     => tz}
+      tl_message = TimelineMessage.new(mri, row, rec, flags)
       e_text = ''
       col_order.each_with_index do |co, co_idx|
-        flags = {:ems_cloud     => ems_cloud,
-                 :ems_container => ems_container,
-                 :time_zone     => tz}
-        val = tl_message.message_html(co, row, rec, flags)
+        val = tl_message.message_html(co)
         e_text += "<b>#{headers[co_idx]}:</b> #{val}<br/>" unless val.to_s.empty? || co == "id"
       end
       e_text = e_text.chomp('<br/>')

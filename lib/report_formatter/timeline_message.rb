@@ -2,8 +2,11 @@ module ReportFormatter
   class TimelineMessage
     include CompressedIds
 
-    def initialize(miq_report_instance)
+    def initialize(miq_report_instance, row, event, flags)
       @mri = miq_report_instance
+      @event, @ems_cloud, @ems_container = event, flags[:ems_cloud], flags[:ems_container]
+      @row = row
+      @flags = flags
     end
 
     def vm_name
@@ -81,16 +84,8 @@ module ReportFormatter
       end
     end
 
-    def set_parameters(column, row, event, flags)
-      @event, @ems_cloud, @ems_container = event, flags[:ems_cloud], flags[:ems_container]
+    def message_html(column)
       @column = column
-      @row = row
-      @flags = flags
-    end
-
-    def message_html(column, row, event, flags)
-      set_parameters(column, row, event, flags)
-
       field = column.tr('.', '_').to_sym
       respond_to?(field) ? send(field).to_s : text
     end

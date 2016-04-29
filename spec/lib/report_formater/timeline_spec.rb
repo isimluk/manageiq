@@ -56,7 +56,7 @@ describe ReportFormatter::TimelineMessage do
     tests.each do |column, href|
       it "Evaluate column #{column} content" do
         row[column] = 'test timeline'
-        val = ReportFormatter::TimelineMessage.new(mri).message_html(column, row, event, flags)
+        val = ReportFormatter::TimelineMessage.new(mri, row, event, flags).message_html(column)
         expect(val).to eq(href)
       end
     end
@@ -81,7 +81,7 @@ describe ReportFormatter::TimelineMessage do
     tests.each do |column, href|
       it "Evaluate column #{column} content" do
         row[column] = 'test timeline'
-        val = ReportFormatter::TimelineMessage.new(mri).message_html(column, row, event, flags)
+        val = ReportFormatter::TimelineMessage.new(mri, row, event, flags).message_html(column)
         expect(val).to eq(href)
       end
     end
