@@ -2,6 +2,10 @@ module ReportFormatter
   class TimelineMessage
     include CompressedIds
 
+    def initialize(miq_report_instance)
+      @mri = miq_report_instance
+    end
+
     def vm_name
       "<a href=\"/vm/show/#{to_cid(@event.vm_or_template_id)}\">#{@text}</a>" if @event.vm_or_template_id
     end
@@ -65,7 +69,7 @@ module ReportFormatter
     end
 
     def resource_name
-      if mri.db == 'BottleneckEvent'
+      if @mri.db == 'BottleneckEvent'
         db = if @ems_cloud && @event.resource_type == 'ExtManagementSystem'
                'ems_cloud'
              elsif @event.resource_type == 'ExtManagementSystem'

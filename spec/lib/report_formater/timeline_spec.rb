@@ -31,6 +31,8 @@ describe ReportFormatter::ReportTimeline do
 end
 
 describe ReportFormatter::TimelineMessage do
+  let(:mri) { FactoryGirl.create(:miq_report) }
+
   describe '#message_html on container event' do
     row = {}
     let(:ems) { FactoryGirl.create(:ems_redhat, :id => 42) }
@@ -54,7 +56,7 @@ describe ReportFormatter::TimelineMessage do
     tests.each do |column, href|
       it "Evaluate column #{column} content" do
         row[column] = 'test timeline'
-        val = ReportFormatter::TimelineMessage.new.message_html(column, row, event, flags)
+        val = ReportFormatter::TimelineMessage.new(mri).message_html(column, row, event, flags)
         expect(val).to eq(href)
       end
     end
@@ -79,7 +81,7 @@ describe ReportFormatter::TimelineMessage do
     tests.each do |column, href|
       it "Evaluate column #{column} content" do
         row[column] = 'test timeline'
-        val = ReportFormatter::TimelineMessage.new.message_html(column, row, event, flags)
+        val = ReportFormatter::TimelineMessage.new(mri).message_html(column, row, event, flags)
         expect(val).to eq(href)
       end
     end

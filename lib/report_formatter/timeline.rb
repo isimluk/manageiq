@@ -53,7 +53,6 @@ module ReportFormatter
     end
 
     def tl_event(tl_xml, row, col)
-      tl_message = TimelineMessage.new
       mri = options.mri
       tz = mri.get_time_zone(Time.zone.name)
       etime = row[col]
@@ -209,6 +208,7 @@ module ReportFormatter
       headers.delete(j)
       headers.push(j)
 
+      tl_message = TimelineMessage.new(mri)
       e_text = ''
       col_order.each_with_index do |co, co_idx|
         flags = {:ems_cloud     => ems_cloud,
