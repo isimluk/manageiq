@@ -399,9 +399,6 @@ class TreeBuilder
                         when Condition           then x_get_tree_co_kids(parent, count_only)
                         when MiqEventDefinition  then x_get_tree_ev_kids(parent, count_only, parents)
                         when MiqPolicy           then x_get_tree_po_kids(parent, count_only)
-
-                        when MiqSearch           then nil
-                        when ManageIQ::Providers::Openstack::CloudManager::Vm         then nil
                         end
     children_or_count || (count_only ? 0 : [])
   end
