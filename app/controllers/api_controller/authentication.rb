@@ -68,11 +68,11 @@ class ApiController
       {
         :userid     => user.userid,
         :name       => user.name,
-        :user_href  => "#{@req.api_prefix}/users/#{user.id}",
+        :user_href  => href('users', user.id),
         :group      => group.description,
-        :group_href => "#{@req.api_prefix}/groups/#{group.id}",
+        :group_href => href('groups', group.id),
         :role       => group.miq_user_role_name,
-        :role_href  => "#{@req.api_prefix}/roles/#{group.miq_user_role.id}",
+        :role_href  => href('roles', group.miq_user_role.id),
         :tenant     => group.tenant.name,
         :groups     => user.miq_groups.pluck(:description),
       }
@@ -144,7 +144,7 @@ class ApiController
       }
       collection, method, action = collection_config.what_refers_to_feature(ident_str)
       collections = collection_config.names_for_feature(ident_str)
-      res["href"] = "#{@req.api_prefix}/#{collections.first}" if collections.one?
+      res["href"] = href(collections.first) if collections.one?
       res["action"] = api_action_details(collection, method, action) if collection.present?
       res["children"] = children if children.present?
       pf_result[ident_str] = res
@@ -154,7 +154,7 @@ class ApiController
       {
         "name"   => action[:name],
         "method" => method,
-        "href"   => "#{@req.api_prefix}/#{collection}"
+        "href"   => href(collection)
       }
     end
 
