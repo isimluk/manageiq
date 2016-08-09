@@ -277,7 +277,7 @@ class ApiController
     end
 
     def validate_post_api_action_as_subcollection(cname, mname, aname)
-      return if cname == @req.collection
+      return unless @req.subcollection
       return if collection_config.subcollection_denied?(@req.collection, cname)
 
       aspec = collection_config.typed_subcollection_actions(@req.collection, cname)
