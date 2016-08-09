@@ -81,7 +81,7 @@ module ApplicationController::Explorer
       # don't need to set params[:id] and do find_checked_items for methods
       # like ownership, the code in those methods handle it
       if %w(edit right_size resize attach detach live_migrate evacuate).include?(action)
-        @_params[:id] = (params[:id] ? [params[:id]] : find_checked_items)[0]
+        @_params[:id] = params[:id] ? params[:id] : find_checked_items[0]
       end
       if ['protect', 'tag'].include?(action)
         case model
