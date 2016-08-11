@@ -632,14 +632,13 @@ module ApplicationHelper
   def model_report_type(model)
     if model
       if model.ends_with?("Performance", "MetricsRollup")
-        return :performance
+        :performance
       elsif model == UiConstants::TREND_MODEL
-        return :trend
+        :trend
       elsif model.starts_with?("Chargeback")
-        return model.downcase.to_sym
+        model.downcase.to_sym
       end
     end
-    nil
   end
 
   def taskbar_in_header?
