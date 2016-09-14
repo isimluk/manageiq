@@ -16,7 +16,7 @@ class Notification < ApplicationRecord
   def to_h
     {
       :level      => notification_type.level,
-      :created_at => created_at,
+      :created_at => created_at.to_i,
       :text       => notification_type.message,
       :bindings   => text_bindings
     }
