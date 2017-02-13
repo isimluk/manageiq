@@ -1,7 +1,6 @@
 class MiqReport::Formats
-  format_hash = YAML.load_file(ApplicationRecord::FIXTURE_DIR.join('miq_report_formats.yml')).freeze
-  FORMATS                = format_hash[:formats].freeze
-  DEFAULTS_AND_OVERRIDES = format_hash[:defaults_and_overrides].freeze
+  FORMATS                = YAML.load_file(ApplicationRecord::FIXTURE_DIR.join('miq_report_formats.yml')).freeze
+  DEFAULTS_AND_OVERRIDES = YAML.load_file(ApplicationRecord::FIXTURE_DIR.join('miq_report_format_defaults.yml')).freeze
 
   def self.available_formats_for(column, suffix, datatype)
     is_break_sfx = (suffix && MiqReport.is_break_suffix?(suffix))
